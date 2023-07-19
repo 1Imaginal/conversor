@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.21506849315068494" prefHeight="444.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conversorxd.MainController">
+   <items>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="126.0">
+         <children>
+            <Button fx:id="divisasButton" layoutX="-1.0" mnemonicParsing="false" onAction="#cambiarEscenaDivisas" prefHeight="138.0" prefWidth="154.0" styleClass="botones" />
+            <Button fx:id="distanciasButton" layoutX="-1.0" layoutY="142.0" mnemonicParsing="false" onAction="#cambiarEscenaDistancias" prefHeight="149.0" prefWidth="154.0" styleClass="botones" />
+            <Button fx:id="temperaturasButton" layoutX="-1.0" layoutY="294.0" mnemonicParsing="false" onAction="#cambiarEscenaTemperaturas" prefHeight="149.0" prefWidth="154.0" styleClass="botones" />
+            <ImageView disable="true" fitHeight="92.0" fitWidth="92.0" layoutX="30.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/divisas.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="92.0" fitWidth="107.0" layoutX="31.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/termometro.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="92.0" fitWidth="105.0" layoutX="31.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/distancia.png" />
+               </image>
+            </ImageView>
+            <Line endX="112.0" layoutX="49.0" layoutY="141.0" startX="-50.0" />
+            <Line endX="73.0" layoutX="86.0" layoutY="294.0" startX="-92.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="463.0">
+         <children>
+            <Accordion layoutX="128.0" layoutY="121.0" />
+            <Accordion layoutX="14.0" layoutY="84.0" />
+            <Label fx:id="metricaInicialLabel" alignment="CENTER" layoutX="-4.0" layoutY="94.0" prefHeight="30.0" prefWidth="576.0" text="Seleccione la divisa inicial" textFill="#dad7d7">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="metricaObjetivoLabel" alignment="CENTER" layoutX="-4.0" layoutY="270.0" prefHeight="30.0" prefWidth="576.0" text="Seleccione la divisa objetivo" textFill="#dad7d7">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="resultadoLabel" alignment="CENTER" layoutX="1.0" layoutY="364.0" prefHeight="30.0" prefWidth="570.0" textFill="#dad7d7">
+               <font>
+                  <Font name="Dubai Light" size="6.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="metricaInicialChoiceBox" layoutX="209.0" layoutY="137.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="metricaObjetivoChoiceBox" layoutX="209.0" layoutY="313.0" prefWidth="150.0" />
+            <Spinner fx:id="cantidad" editable="true" layoutX="188.0" layoutY="221.0" onKeyPressed="#getResultado" onKeyTyped="#getResultado" prefHeight="30.0" prefWidth="192.0" />
+            <Label alignment="CENTER" layoutX="-6.0" layoutY="179.0" prefHeight="30.0" prefWidth="576.0" text="Cantidad a cambiar" textFill="#dad7d7">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="tituloLabel" alignment="CENTER" layoutX="1.0" layoutY="22.0" prefHeight="54.0" prefWidth="570.0" text="Conversor de Divisas" textFill="#dad7d7">
+               <font>
+                  <Font name="Dubai Light" size="30.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </items>
+</SplitPane>
