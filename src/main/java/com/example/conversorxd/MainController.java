@@ -6,18 +6,16 @@ import com.example.conversorxd.models.Temperaturas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 
 public class MainController implements Initializable {
     @FXML
@@ -38,10 +36,6 @@ public class MainController implements Initializable {
     private ChoiceBox<String> metricaObjetivoChoiceBox;
 
     private String[] opciones = {"MXN", "USD", "EUR", "JPY"};
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     private String opcion = "Divisas";
     public void cambiarEscenaDistancias (ActionEvent event) throws IOException {
         opcion = "Distancias";
@@ -103,8 +97,23 @@ public class MainController implements Initializable {
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.1,
                 100000.0);
         valueFactory.setValue(1.0);
+        NumberFormat format = NumberFormat.getNumberInstance();
+        UnaryOperator<TextFormatter.Change> filter = cantidad -> {
+            if (cantidad.isContentChange()) {
+                ParsePosition parsePosition = new ParsePosition(0);
+                format.parse(cantidad.getControlNewText(), parsePosition);
+                if (parsePosition.getIndex() < cantidad.getControlNewText().length()) {
+                    return null;
+                }
+            }
+            return cantidad;
+        };
+        TextFormatter<Double> formatter = new TextFormatter<Double>(
+                new DoubleStringConverter(),0.1, filter);
         cantidad.setValueFactory(valueFactory);
+        cantidad.getEditor().setTextFormatter(formatter);
     }
+
 
     public void getOpcionInicial(ActionEvent event) {
         String opcion = metricaInicialChoiceBox.getValue();
