@@ -3,6 +3,7 @@ package com.example.conversorxd;
 import com.example.conversorxd.models.Distancias;
 import com.example.conversorxd.models.Divisas;
 import com.example.conversorxd.models.Temperaturas;
+import com.example.conversorxd.models.Tiempos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -84,6 +85,21 @@ public class MainController implements Initializable {
         metricaObjetivoChoiceBox.setValue("USD");
         resultadoLabel.setText("");
     }
+    public void cambiarEscenaTiempos (ActionEvent event) throws IOException {
+        opcion = "Tiempos";
+        tituloLabel.setText("Conversor de " + opcion);
+        metricaInicialLabel.setText("Seleccione el tiempo inicial");
+        metricaObjetivoLabel.setText("Seleccione el tiempo objetivo");
+        metricaInicialChoiceBox.setValue(null);
+        metricaObjetivoChoiceBox.setValue(null);
+        String[] tiempos = {"Segundos", "Minutos", "Horas", "Dias", "Meses", "Años"};
+        opciones = tiempos;
+        metricaInicialChoiceBox.getItems().setAll(opciones);
+        metricaObjetivoChoiceBox.getItems().setAll(opciones);
+        metricaInicialChoiceBox.setValue("Segundos");
+        metricaObjetivoChoiceBox.setValue("Minutos");
+        resultadoLabel.setText("");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -135,9 +151,12 @@ public class MainController implements Initializable {
         } else if (opcion == "Distancias") {
             Distancias conversion = new Distancias(metricaInicial, metricaObjetivo);
             resultado = conversion.conversion(cantidad.getValue());
-        } else {
+        } else if (opcion == "Temperaturas"){
             Temperaturas conversion = new Temperaturas();
             resultado = conversion.conversion(cantidad.getValue(), metricaInicial, metricaObjetivo);
+        } else {
+            Tiempos conversion = new Tiempos();
+            resultado = conversion.conversion(metricaInicial, metricaObjetivo, cantidad.getValue());
         }
         resultado = Double.parseDouble(String.format("%.4f", resultado));
         resultadoLabel.setText("El resultado es: " + resultado + " " + metricaObjetivo + "(s)");
